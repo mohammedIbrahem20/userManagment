@@ -77,21 +77,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
-                //.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                // allow anonymous resource requests
                 .antMatchers(
                         HttpMethod.GET,
-                        "/",
-                        "/our-websocket/**/**/**",
-                        "/v2/api-docs",           // swagger
-                        "/webjars/**",            // swagger-ui webjars
-                        "/swagger-resources/**",  // swagger-ui resources
-                        "/configuration/**",      // swagger configuration
-                        "/*.html",
-                        "/favicon.ico",
-                        "/**/*.html",
-                        "/**/*.css",
-                        "/**/*.js"
+                        "/"
                 ).permitAll()
                 .antMatchers("/api/auth/**","/api/auth/signin").permitAll()
                 .antMatchers("/api/examPlanner/course/list/all/detailed").permitAll()		// exclude courses list
@@ -99,10 +87,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-	            .and()
-		        .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
-		        .logoutSuccessUrl("/login").deleteCookies("JSESSIONID").invalidateHttpSession(true) 
-		        .permitAll()
 		        
         .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
         .and().rememberMe().rememberMeCookieName("remeber-me").key("uniqueAndSecret");
