@@ -81,7 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         HttpMethod.GET,
                         "/"
                 ).permitAll()
-                .antMatchers("/api/auth/**","/api/auth/signin").permitAll()
+                .antMatchers("/api/auth/**","/api/auth/signin","/api/user").permitAll()
                 .antMatchers("/api/examPlanner/course/list/all/detailed").permitAll()		// exclude courses list
                 .anyRequest().authenticated()
                 .and()

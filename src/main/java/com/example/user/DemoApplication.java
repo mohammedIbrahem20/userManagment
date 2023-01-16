@@ -28,6 +28,8 @@ public class DemoApplication {
         javaMailSender.setProtocol("smtp");
         javaMailSender.setHost("smtp.gmail.com");
         javaMailSender.setPort(587);
+        
+        // i tried it using my email and my app password
         javaMailSender.setUsername("example@gmail.com"); // type real email
         javaMailSender.setPassword("password"); // type real password
 
